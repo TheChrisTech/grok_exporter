@@ -55,10 +55,8 @@ var additionalFieldDefinitions = map[string]string{
 }
 
 func main() {
-	var log logrus.FieldLogger
 	flag.Parse()
-	var sb strings.Builder
-	sb.WriteString("flags parsed.\n")
+	fmt.Fprintf(os.Stdout, "flags parsed\n")
 	if *printVersion {
 		fmt.Printf("%v\n", exporter.VersionString())
 		return
@@ -88,9 +86,9 @@ func main() {
 		registry.MustRegister(m.Collector())
 	}
 	nLinesTotal, nMatchesByMetric, procTimeMicrosecondsByMetric, nErrorsByMetric := initSelfMonitoring(metrics, registry)
-	log.Debugf("Starting tail on %v", cfg)
+	fmt.Fprintf(os.Stdout, "starting tailer\n")
 	tail, err := startTailer(cfg, registry)
-	log.Debugf("tail started.")
+	fmt.Fprintf(os.Stdout, "tailer started\n")
 	exitOnError(err)
 
 	// gather up the handlers with which to start the webserver
@@ -113,7 +111,7 @@ func main() {
 	fmt.Print(startMsg(cfg, httpHandlers))
 	serverErrors := startServer(cfg.Server, httpHandlers)
 	retentionTicker := time.NewTicker(cfg.Global.RetentionCheckInterval)
-	log.Debugf("HERE1.")
+	fmt.Fprintf(os.Stdout, "HERE1.\n")
 	for {
 		select {
 		case err := <-serverErrors:
@@ -125,8 +123,8 @@ func main() {
 				exitOnError(fmt.Errorf("error reading log lines: %v", err.Error()))
 			}
 		case line := <-tail.Lines():
-			sb.WriteString("line reading...\n")
-			sb.WriteString(fmt.Sprintf("%v\n", line.Line))
+			fmt.Fprintf(os.Stdout, "line reading...\n")
+			fmt.Fprintf(os.Stdout, "line is ", line, "\n")
 			matched := false
 			for _, metric := range metrics {
 				start := time.Now()
