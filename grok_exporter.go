@@ -125,7 +125,7 @@ func main() {
 			}
 		case line := <-tail.Lines():
 			sb.WriteString("line reading...\n")
-			sb.WriteString("%v\n", line.Line)
+			sb.WriteString(fmt.Sprintf("%v\n", line.Line))
 			matched := false
 			for _, metric := range metrics {
 				start := time.Now()
