@@ -346,16 +346,14 @@ func startTailer(cfg *v3.Config, registry prometheus.Registerer) (fswatcher.File
 			tail, err = fswatcher.RunFileTailer(cfg.Input.Globs, cfg.Input.Readall, cfg.Input.FailOnMissingLogfile, logger)
 			if err != nil {
 				return nil, err
-			}
-			else {
+			} else {
 				return nil, fmt.Errorf("Error: '%v'", err)
 			}
 		} else {
 			tail, err = fswatcher.RunPollingFileTailer(cfg.Input.Globs, cfg.Input.Readall, cfg.Input.FailOnMissingLogfile, cfg.Input.PollInterval, logger)
 			if err != nil {
 				return nil, err
-			}
-			else {
+			} else {
 				return nil, fmt.Errorf("Error: '%v'", err)
 			}
 		}
