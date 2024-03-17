@@ -55,6 +55,7 @@ var additionalFieldDefinitions = map[string]string{
 }
 
 func main() {
+	var log logrus.FieldLogger
 	flag.Parse()
 	var sb strings.Builder
 	sb.WriteString("flags parsed.\n")
