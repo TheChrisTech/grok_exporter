@@ -56,6 +56,8 @@ var additionalFieldDefinitions = map[string]string{
 
 func main() {
 	flag.Parse()
+	var sb strings.Builder
+	sb.WriteString("flags parsed.\n")
 	if *printVersion {
 		fmt.Printf("%v\n", exporter.VersionString())
 		return
@@ -122,6 +124,8 @@ func main() {
 				exitOnError(fmt.Errorf("error reading log lines: %v", err.Error()))
 			}
 		case line := <-tail.Lines():
+			sb.WriteString("line reading...\n")
+			sb.WriteString("%v\n", line.line)
 			matched := false
 			for _, metric := range metrics {
 				start := time.Now()
