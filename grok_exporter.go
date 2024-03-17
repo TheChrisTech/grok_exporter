@@ -342,11 +342,13 @@ func startTailer(cfg *v3.Config, registry prometheus.Registerer) (fswatcher.File
 	switch {
 	case cfg.Input.Type == "file":
 		if cfg.Input.PollInterval == 0 {
+			fmt.Fprintf(os.Stdout, "HERE2.\n")
 			tail, err = fswatcher.RunFileTailer(cfg.Input.Globs, cfg.Input.Readall, cfg.Input.FailOnMissingLogfile, logger)
 			if err != nil {
 				return nil, err
 			}
 		} else {
+			fmt.Fprintf(os.Stdout, "HERE3.\n")
 			tail, err = fswatcher.RunPollingFileTailer(cfg.Input.Globs, cfg.Input.Readall, cfg.Input.FailOnMissingLogfile, cfg.Input.PollInterval, logger)
 			if err != nil {
 				return nil, err

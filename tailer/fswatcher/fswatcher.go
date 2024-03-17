@@ -108,7 +108,7 @@ func RunPollingFileTailer(globs []glob.Glob, readall bool, failOnMissingFile boo
 }
 
 func runFileTailer(initFunc func() (fswatcher, Error), globs []glob.Glob, readall bool, failOnMissingFile bool, log logrus.FieldLogger) (FileTailer, error) {
-
+	fmt.Fprintf(os.Stdout, "HERE4.\n")
 	var (
 		t   *fileTailer
 		Err Error
@@ -145,6 +145,7 @@ func runFileTailer(initFunc func() (fswatcher, Error), globs []glob.Glob, readal
 
 		for _, dir := range t.watchedDirs {
 			dirLogger := log.WithField("directory", dir.Path())
+			fmt.Fprintf(os.Stdout, "HERE5.\n")
 			dirLogger.Debugf("initializing directory")
 			Err = t.syncFilesInDir(dir, readall, dirLogger) // This may already write lines to the lines channel, so we will not go past this line unless the consumer starts reading lines.
 			if Err != nil {
@@ -167,7 +168,7 @@ func runFileTailer(initFunc func() (fswatcher, Error), globs []glob.Glob, readal
 				return
 			}
 		}
-
+		fmt.Fprintf(os.Stdout, "HERE6.\n")
 		for { // event consumer loop
 			select {
 			case <-t.done:
@@ -351,6 +352,7 @@ func (t *fileTailer) readNewLines(file *fileWithReader, log logrus.FieldLogger) 
 		eof  bool
 		err  error
 	)
+	fmt.Fprintf(os.Stdout, "HERE7.\n")
 	for {
 		line, eof, err = file.reader.ReadLine(file.file)
 		if err != nil {
@@ -359,6 +361,7 @@ func (t *fileTailer) readNewLines(file *fileWithReader, log logrus.FieldLogger) 
 		if eof {
 			return nil
 		}
+		fmt.Fprintf(os.Stdout, "HERE8.\n")
 		log.Debugf("read line %q", line)
 		select {
 		case <-t.done:
