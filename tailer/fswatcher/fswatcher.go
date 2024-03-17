@@ -352,7 +352,7 @@ func (t *fileTailer) readNewLines(file *fileWithReader, log logrus.FieldLogger) 
 		eof  bool
 		err  error
 	)
-	fmt.Fprintf(os.Stdout, "HERE7.\n")
+	fmt.Fprintf(os.Stdout, "HERE7.\n", file.file)
 	for {
 		line, eof, err = file.reader.ReadLine(file.file)
 		if err != nil {
