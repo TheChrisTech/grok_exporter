@@ -110,7 +110,7 @@ func main() {
 
 	fmt.Print(startMsg(cfg, httpHandlers))
 	serverErrors := startServer(cfg.Server, httpHandlers)
-
+	log.Debugf("tail.Lines() --> %v", tail.Lines())
 	retentionTicker := time.NewTicker(cfg.Global.RetentionCheckInterval)
 
 	for {
