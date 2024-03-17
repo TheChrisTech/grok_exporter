@@ -88,8 +88,9 @@ func main() {
 		registry.MustRegister(m.Collector())
 	}
 	nLinesTotal, nMatchesByMetric, procTimeMicrosecondsByMetric, nErrorsByMetric := initSelfMonitoring(metrics, registry)
-
+	log.Debugf("Starting tail on %v", cfg)
 	tail, err := startTailer(cfg, registry)
+	log.Debugf("tail started.")
 	exitOnError(err)
 
 	// gather up the handlers with which to start the webserver
@@ -111,9 +112,8 @@ func main() {
 
 	fmt.Print(startMsg(cfg, httpHandlers))
 	serverErrors := startServer(cfg.Server, httpHandlers)
-	log.Debugf("tail.Lines() --> %v", tail.Lines())
 	retentionTicker := time.NewTicker(cfg.Global.RetentionCheckInterval)
-
+	log.Debugf("HERE1.")
 	for {
 		select {
 		case err := <-serverErrors:
