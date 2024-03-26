@@ -170,10 +170,13 @@ func runFileTailer(initFunc func() (fswatcher, Error), globs []glob.Glob, readal
 		}
 		fmt.Fprintf(os.Stdout, "HERE6.\n")
 		for { // event consumer loop
+			fmt.Fprintf(os.Stdout, "HERE7a.\n")
 			select {
 			case <-t.done:
+				fmt.Fprintf(os.Stdout, "HERE7b.\n")
 				return
 			case event, open := <-eventProducerLoop.Events():
+				fmt.Fprintf(os.Stdout, "HERE7c.\n")
 				if !open {
 					return
 				}
@@ -186,6 +189,7 @@ func runFileTailer(initFunc func() (fswatcher, Error), globs []glob.Glob, readal
 					return
 				}
 			case err, open := <-eventProducerLoop.Errors():
+				fmt.Fprintf(os.Stdout, "HERE7d.\n")
 				if !open {
 					return
 				}
