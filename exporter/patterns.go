@@ -17,7 +17,7 @@ package exporter
 import (
 	"bufio"
 	"fmt"
-	"github.com/fstab/grok_exporter/tailer/glob"
+	"github.com/jdrews/go-tailer/glob"
 	"io/ioutil"
 	"os"
 	"path/filepath"

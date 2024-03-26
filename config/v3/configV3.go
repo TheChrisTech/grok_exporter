@@ -23,7 +23,7 @@ import (
 	"time"
 
 	v2 "github.com/fstab/grok_exporter/config/v2"
-	"github.com/fstab/grok_exporter/tailer/glob"
+	"github.com/jdrews/go-tailer/glob"
 	"github.com/fstab/grok_exporter/template"
 	"gopkg.in/yaml.v2"
 )

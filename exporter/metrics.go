@@ -18,7 +18,7 @@ import (
 	"fmt"
 	configuration "github.com/fstab/grok_exporter/config/v3"
 	"github.com/fstab/grok_exporter/oniguruma"
-	"github.com/fstab/grok_exporter/tailer/glob"
+	"github.com/jdrews/go-tailer/glob"
 	"github.com/fstab/grok_exporter/template"
 	"github.com/prometheus/client_golang/prometheus"
 	"strconv"

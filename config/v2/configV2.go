@@ -16,7 +16,7 @@ package v2
 
 import (
 	"fmt"
-	"github.com/fstab/grok_exporter/tailer/glob"
+	"github.com/jdrews/go-tailer/glob"
 	"github.com/fstab/grok_exporter/template"
 	"gopkg.in/yaml.v2"
 	"strconv"

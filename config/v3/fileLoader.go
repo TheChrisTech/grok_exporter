@@ -16,7 +16,7 @@ package v3
 
 import (
 	"fmt"
-	"github.com/fstab/grok_exporter/tailer/glob"
+	"github.com/jdrews/go-tailer/glob"
 	"io/ioutil"
 	"path/filepath"
 )
